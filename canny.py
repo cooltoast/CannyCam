@@ -1,17 +1,3 @@
-''' file name : canny.py
-
-Description : This sample shows how to find edges using canny edge detection
-
-This is Python version of this tutorial : http://opencv.itseez.com/doc/tutorials/imgproc/imgtrans/canny_detector/canny_detector.html
-
-Level : Beginner
-
-Benefits : Learn to apply canny edge detection to images.
-
-Usage : python canny.py 
-
-Written by : Abid K. (abidrahman2@gmail.com) , Visit opencvpython.blogspot.com for more tutorials '''
-
 import cv2
 import numpy as np
 
