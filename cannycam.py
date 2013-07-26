@@ -29,7 +29,7 @@ def repeat():
 def SetThreshold(slider_value):
     global lowThreshold
     lowThreshold = slider_value
-    print lowThreshold
+    
     
 
 cv2.createTrackbar('Min threshold','canny cam',lowThreshold, max_lowThreshold, SetThreshold)
