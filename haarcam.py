@@ -34,7 +34,6 @@ if __name__ == "__main__":
             cv.Rectangle(image, (x,y), (x+w,y+h), 255)
 
         cv.ShowImage("w1", image)
-        c=cv.WaitKey(10)
-        if c==27:
+        if cv.WaitKey(10) == 27:
             exit()
         i += 1
