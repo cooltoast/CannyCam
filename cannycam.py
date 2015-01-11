@@ -11,7 +11,6 @@ ratio = 3
 kernel_size = 3
 
 
-
 def repeat():
     frame = cv.QueryFrame(capture)
     
@@ -31,23 +30,22 @@ def repeat():
     detected_edges = cv2.Canny(detected_edges,lowThreshold,lowThreshold*ratio,apertureSize = kernel_size)
     dst = cv2.bitwise_and(img,img,mask = detected_edges)  # just add some colours to edges from original image.
     
-
     cv2.imshow('canny cam',detected_edges)
 
     c = cv.WaitKey(10)
     if c == 27:
         exit()
 
+
 def SetThreshold(slider_value):
     global lowThreshold
     lowThreshold = slider_value
     
-    
 
-cv2.createTrackbar('Min threshold','canny cam',lowThreshold, max_lowThreshold, SetThreshold)
+if __name__ == '__main__':
+  cv2.createTrackbar('Min threshold','canny cam',lowThreshold, max_lowThreshold, SetThreshold)
 
+  i = 0
+  while True:
+      repeat()
 
-i = 0
-while True:
-    repeat()
-  

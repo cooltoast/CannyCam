@@ -2,7 +2,7 @@
 
 import cv
 
-HAAR_CASCADE_PATH = "/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
+HAAR_CASCADE_PATH = "/home/mp/Documents/cannycam/xmls/haarcascade_frontalface_default.xml"
 CAMERA_INDEX = 0
 storage = cv.CreateMemStorage()
 cascade = cv.Load(HAAR_CASCADE_PATH)
