@@ -22,7 +22,11 @@ Install OpenCV with Python
 ```
 sudo apt-get install python-opencv
 ```
-And run haarcam.py
+To run haarcam.py
 ```
 python haarcam.py
+```
+To run cannycam.py
+```
+python cannycam.py
 ```
