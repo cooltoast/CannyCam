@@ -14,3 +14,15 @@ Targets used: face, upper body, lower body, hands. Knee, elbow, smaller body par
 Next step is to implement this into a diagnostic image detection program for assisting doctors. E.g. patient goes to doctor with broken ankle, doctor takes x-ray, diagnostic image detection program may be able to detect certain problems with patient's ankle upon scanning the x-ray. 
 
 CannyCam. Better than a nannycam.
+
+Installation
+----
+
+Install OpenCV with Python
+```
+sudo apt-get install python-opencv
+```
+And run haarcam.py
+```
+python haarcam.py
+```
