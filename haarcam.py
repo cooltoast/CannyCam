@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 import cv
+import os
 
-HAAR_CASCADE_PATH = "/home/mp/Documents/cannycam/xmls/haarcascade_frontalface_default.xml"
+HAAR_CASCADE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'xmls', 'haarcascade_frontalface_default.xml')
 CAMERA_INDEX = 0
 storage = cv.CreateMemStorage()
 cascade = cv.Load(HAAR_CASCADE_PATH)
