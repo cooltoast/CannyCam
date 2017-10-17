@@ -4,7 +4,6 @@ python:
   - 2.7
 before_install:
   - docker build -t cannycam .
-  - docker run cannycam
 script:
   - echo 'no'
 notifications:
