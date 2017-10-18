@@ -18,15 +18,16 @@ CannyCam. Better than a nannycam.
 Installation
 ----
 
-Install OpenCV with Python
+Install Docker: https://docs.docker.com/engine/installation/
+
+Build the image
 ```
-sudo apt-get install python-opencv
+docker build -t cannycam .
 ```
-To run haarcam.py
+
+Running
+----
+Run the image with the appropriate DISPLAY environment variable
 ```
-python haarcam.py
-```
-To run cannycam.py
-```
-python cannycam.py
+docker run -e DISPLAY=`ifconfig en0 | grep -w inet | awk '{print $2}'` cannycam
 ```
