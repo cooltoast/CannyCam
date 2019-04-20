@@ -17,16 +17,23 @@ CannyCam. Better than a nannycam.
 
 Installation
 ----
+```bash
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
-Install OpenCV with Python
-```
-sudo apt-get install python-opencv
-```
+Run
+---
 To run haarcam.py
-```
+```bash
 python haarcam.py
 ```
 To run cannycam.py
-```
+```bash
 python cannycam.py
+```
+To run cannyhaarcam.py
+```bash
+python cannyhaarcam.py
 ```

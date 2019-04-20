@@ -1,40 +1,53 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
-import cv
 import os
 
-HAAR_CASCADE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'xmls', 'haarcascade_frontalface_default.xml')
-CAMERA_INDEX = 0
-storage = cv.CreateMemStorage()
-cascade = cv.Load(HAAR_CASCADE_PATH)
+import cv2
 
-def detect_faces(image):
-    faces = []
-    detected = cv.HaarDetectObjects(image, cascade, storage, 1.2, 2, cv.CV_HAAR_DO_CANNY_PRUNING, (100,100))
-    if detected:
-        #print detected
-        for (x,y,w,h),n in detected:
-            faces.append((x,y,w,h))
-    return faces
+from basecam import BaseCam
+from util import wait_frames
 
-if __name__ == "__main__":
-    cv.NamedWindow("w1", cv.CV_WINDOW_AUTOSIZE)
-    capture = cv.CaptureFromCAM(CAMERA_INDEX)
-    faces = []
 
-    i = 0
-    while True:
-        image = cv.QueryFrame(capture)
+class HaarCam(BaseCam):
+    HAAR_CASCADE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    'xmls',
+                                    'haarcascade_frontalface_default.xml')
+    face_cascade = cv2.CascadeClassifier(HAAR_CASCADE_PATH)
 
-        # Only run the Detection algorithm every 5 frames to improve performance
-        if i%5==0:
-            faces = detect_faces(image)
-            print faces
+    def detect_faces(self, img):
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-        for (x,y,w,h) in faces:
-            cv.Rectangle(image, (x,y), (x+w,y+h), 255)
+        faces = self.face_cascade.detectMultiScale(gray, 1.3, 5)
 
-        cv.ShowImage("w1", image)
-        if cv.WaitKey(10) == 27:
-            exit()
-        i += 1
+        for x, y, w, h in faces:
+            cv2.rectangle(img,
+                          (x, y),
+                          (x + w, y + h),
+                          (255, 0, 0),
+                          thickness=2)
+
+        return img
+
+    def run(self, frame_throttle):
+        """
+        Run main HaarCam loop.
+
+        :param frame_throttle: Number of frames to throttle for
+        capturing and processing an image from the webcam.
+        """
+        for i in wait_frames(throttle=frame_throttle):
+            ret_val, img = self.cam.read()
+            detected = self.detect_faces(img)
+
+            cv2.imshow(self.window, detected)
+
+            # esc to quit
+            if cv2.waitKey(1) == 27:
+                break
+
+        cv2.destroyWindow(self.window)
+
+
+if __name__ == '__main__':
+    h = HaarCam('haarcam')
+    h.run(frame_throttle=10)
