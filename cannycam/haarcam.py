@@ -35,7 +35,7 @@ class HaarCam(BaseCam):
         :param frame_throttle: Number of frames to throttle for
         capturing and processing an image from the webcam.
         """
-        for i in wait_frames(throttle=frame_throttle):
+        for _ in wait_frames(throttle=frame_throttle):
             ret_val, img = self.cam.read()
             detected = self.detect_faces(img)
 

@@ -15,7 +15,7 @@ class CannyHaarCam(CannyCam, HaarCam):
         :param frame_throttle: Number of frames to throttle processing for
         capturing an image from the webcam and performing edge detection.
         """
-        for i in wait_frames(throttle=frame_throttle):
+        for _ in wait_frames(throttle=frame_throttle):
             ret_val, img = self.cam.read()
             edge_detected = self.detect_edges(img)
             detected = self.detect_faces(edge_detected)

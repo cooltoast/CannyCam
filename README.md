@@ -27,13 +27,13 @@ Run
 ---
 To run haarcam.py
 ```bash
-python haarcam.py
+python cannycam/haarcam.py
 ```
 To run cannycam.py
 ```bash
-python cannycam.py
+python cannycam/cannycam.py
 ```
 To run cannyhaarcam.py
 ```bash
-python cannyhaarcam.py
+python cannycam/cannyhaarcam.py
 ```

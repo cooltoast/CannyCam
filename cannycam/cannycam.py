@@ -25,9 +25,6 @@ class CannyCam(BaseCam):
                            self.MAX_THRESHOLD,
                            self._on_threshold_change)
 
-    def _on_threshold_change(self, threshold):
-        self.threshold = threshold
-
     def detect_edges(self, img, color=True):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -47,7 +44,7 @@ class CannyCam(BaseCam):
         :param frame_throttle: Number of frames to throttle for
         capturing and processing an image from the webcam.
         """
-        for i in wait_frames(throttle=frame_throttle):
+        for _ in wait_frames(throttle=frame_throttle):
             ret_val, img = self.cam.read()
             detected = self.detect_edges(img)
 
@@ -58,6 +55,9 @@ class CannyCam(BaseCam):
                 break
 
         cv2.destroyWindow(self.window)
+
+    def _on_threshold_change(self, threshold):
+        self.threshold = threshold
 
 
 if __name__ == '__main__':
