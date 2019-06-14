@@ -2,7 +2,7 @@
 
 import cv2
 
-from canny import CannyCam
+from cannycam import CannyCam
 from haarcam import HaarCam
 from util import wait_frames
 
