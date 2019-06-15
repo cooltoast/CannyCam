@@ -48,6 +48,10 @@ class HaarCam(BaseCam):
         cv2.destroyWindow(self.window)
 
 
-if __name__ == '__main__':
+def main():
     h = HaarCam('haarcam')
     h.run(frame_throttle=10)
+
+
+if __name__ == '__main__':
+    main()

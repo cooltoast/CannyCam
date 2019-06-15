@@ -60,6 +60,10 @@ class CannyCam(BaseCam):
         self.threshold = threshold
 
 
-if __name__ == '__main__':
+def main():
     c = CannyCam('cannycam')
     c.run(frame_throttle=10)
+
+
+if __name__ == '__main__':
+    main()

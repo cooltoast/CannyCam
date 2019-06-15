@@ -29,6 +29,10 @@ class CannyHaarCam(CannyCam, HaarCam):
         cv2.destroyWindow(self.window)
 
 
-if __name__ == '__main__':
+def main():
     c = CannyHaarCam('cannyhaarcam')
     c.run(frame_throttle=10)
+
+
+if __name__ == '__main__':
+    main()
