@@ -1,0 +1,2 @@
+include versioneer.py
+include cannycam/_version.py

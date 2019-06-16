@@ -1,3 +1,4 @@
+import versioneer
 from setuptools import find_packages, setup
 
 
@@ -6,7 +7,8 @@ def read(filename):
         return f.read()
 
 setup(name='cannycam',
-      version='0.0.1',
+      version=versioneer.get_version(),
+      cmdclass=versioneer.get_cmdclass(),
       description='A facial and anatomical recognition program',
       long_description=read('README.md'),
       long_description_content_type="text/markdown",
