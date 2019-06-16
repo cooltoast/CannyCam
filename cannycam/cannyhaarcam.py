@@ -8,17 +8,22 @@ from util import wait_frames
 
 
 class CannyHaarCam(CannyCam, HaarCam):
-    def run(self, frame_throttle):
+    def run(self, frame_throttle, classifier=None):
         """
         Run main CannyHaarCam loop.
 
-        :param frame_throttle: Number of frames to throttle processing for
-        capturing an image from the webcam and performing edge detection.
+        :param frame_throttle: Number of frames to throttle processing for capturing
+        an image from the webcam and performing edge detection.
+        :param classifier: Classifier to detect anatomical parts. Defaults
+        to a face classifier.
         """
+        if classifier is None:
+            classifier = self.face_classifier
+
         for _ in wait_frames(throttle=frame_throttle):
             ret_val, img = self.cam.read()
             edge_detected = self.detect_edges(img)
-            detected = self.detect_faces(edge_detected)
+            detected = self.detect_parts(edge_detected, classifier)
 
             cv2.imshow(self.window, detected)
 
