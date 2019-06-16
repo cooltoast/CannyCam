@@ -9,6 +9,7 @@ setup(name='cannycam',
       version='0.0.1',
       description='A facial and anatomical recognition program',
       long_description=read('README.md'),
+      long_description_content_type="text/markdown",
       classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',

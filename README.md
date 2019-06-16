@@ -18,22 +18,23 @@ CannyCam. Better than a nannycam.
 Installation
 ----
 ```bash
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
+pip install cannycam
 ```
 
 Run
 ---
-To run haarcam.py
+From the command line
 ```bash
-python cannycam/haarcam.py
+python -m cannycam.cannycam
+python -m cannycam.haarcam
+python -m cannycam.cannyhaarcam
 ```
-To run cannycam.py
-```bash
-python cannycam/cannycam.py
-```
-To run cannyhaarcam.py
-```bash
-python cannycam/cannyhaarcam.py
+
+Or in python
+```python
+import cannycam
+
+cannycam.cannycam.main()
+cannycam.haarcam.main()
+cannycam.cannyhaarcam.main()
 ```
