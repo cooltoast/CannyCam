@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 def read(filename):
@@ -18,7 +18,7 @@ setup(name='cannycam',
       url='http://github.com/cooltoast/CannyCam',
       author='cooltoast',
       license='MIT',
-      packages=['cannycam'],
+      packages=find_packages(),
       install_requires=read('requirements.txt').splitlines(),
       entry_points={
           'console_scripts': [
