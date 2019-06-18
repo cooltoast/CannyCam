@@ -1,14 +1,9 @@
 #!/usr/bin/env python2.7
 
-import os
-
 import cv2
 
 from basecam import BaseCam
-from util import wait_frames
-
-
-XML_DIRECTORY = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'xmls')
+from util import get_cascade_file_path, is_escape, wait_frames
 
 
 class HaarCam(BaseCam):
@@ -18,10 +13,10 @@ class HaarCam(BaseCam):
         """
         super(HaarCam, self).__init__(window)
 
-        self.face_classifier = self._init_classifier('haarcascade_frontalface_default.xml')
-        self.fullbody_classifier = self._init_classifier('haarcascade_fullbody.xml')
-        self.lowerbody_classifier = self._init_classifier('haarcascade_lowerbody.xml')
-        self.upperbody_classifier = self._init_classifier('haarcascade_upperbody.xml')
+        self._face_classifier = self._init_classifier('haarcascade_frontalface_default.xml')
+        self._fullbody_classifier = self._init_classifier('haarcascade_fullbody.xml')
+        self._lowerbody_classifier = self._init_classifier('haarcascade_lowerbody.xml')
+        self._upperbody_classifier = self._init_classifier('haarcascade_upperbody.xml')
 
     def detect_parts(self, img, classifier):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -49,17 +44,34 @@ class HaarCam(BaseCam):
         if classifier is None:
             classifier = self.face_classifier
 
-        for _ in wait_frames(throttle=frame_throttle):
-            ret_val, img = self.cam.read()
-            detected = self.detect_parts(img, classifier)
+        try:
+            for _ in wait_frames(throttle=frame_throttle):
+                ret_val, img = self.cam.read()
+                detected = self.detect_parts(img, classifier)
 
-            cv2.imshow(self.window, detected)
+                cv2.imshow(self.window, detected)
 
-            # esc to quit
-            if cv2.waitKey(1) == 27:
-                break
+                # esc to quit
+                if is_escape(cv2.waitKey(1)):
+                    break
+        finally:
+            cv2.destroyWindow(self.window)
 
-        cv2.destroyWindow(self.window)
+    @property
+    def face_classifier(self):
+        return self._face_classifier
+
+    @property
+    def fullbody_classifier(self):
+        return self._fullbody_classifier
+
+    @property
+    def lowerbody_classifier(self):
+        return self._lowerbody_classifier
+
+    @property
+    def upperbody_classifier(self):
+        return self._upperbody_classifier
 
     def _init_classifier(self, cascade_file):
         """
@@ -67,9 +79,7 @@ class HaarCam(BaseCam):
 
         :param cascade_file: Name of cascade file in the ``xmls`` directory.
         """
-        cascade_path = os.path.join(XML_DIRECTORY, cascade_file)
-
-        return cv2.CascadeClassifier(cascade_path)
+        return cv2.CascadeClassifier(get_cascade_file_path(cascade_file))
 
 
 def main():

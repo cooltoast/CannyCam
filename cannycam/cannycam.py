@@ -3,7 +3,7 @@
 import cv2
 
 from basecam import BaseCam
-from util import wait_frames
+from util import is_escape, wait_frames
 
 
 class CannyCam(BaseCam):
@@ -44,17 +44,18 @@ class CannyCam(BaseCam):
         :param frame_throttle: Number of frames to throttle for
         capturing and processing an image from the webcam.
         """
-        for _ in wait_frames(throttle=frame_throttle):
-            ret_val, img = self.cam.read()
-            detected = self.detect_edges(img)
+        try:
+            for _ in wait_frames(throttle=frame_throttle):
+                ret_val, img = self.cam.read()
+                detected = self.detect_edges(img)
 
-            cv2.imshow(self.window, detected)
+                cv2.imshow(self.window, detected)
 
-            # esc to quit
-            if cv2.waitKey(1) == 27:
-                break
-
-        cv2.destroyWindow(self.window)
+                # esc to quit
+                if is_escape(cv2.waitKey(1)):
+                    break
+        finally:
+            cv2.destroyWindow(self.window)
 
     def _on_threshold_change(self, threshold):
         self.threshold = threshold
