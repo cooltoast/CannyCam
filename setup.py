@@ -23,6 +23,9 @@ setup(name='cannycam',
       license='MIT',
       packages=find_packages(),
       install_requires=read('requirements.txt').splitlines(),
+      extras_require={
+          'docs': read('docs_requirements.txt').splitlines()
+      },
       entry_points={
           'console_scripts': [
               'cannycam=cannycam.cannycam:main',
