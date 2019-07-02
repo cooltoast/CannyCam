@@ -4,11 +4,15 @@ import cv2
 
 from cannycam import CannyCam
 from haarcam import HaarCam
-from util import inherit_doc, is_escape, wait_frames
+from util import apply_doc, is_escape, wait_frames
 
 
 class CannyHaarCam(CannyCam, HaarCam):
-    @inherit_doc(HaarCam.run)
+    """
+    Webcam that performs Canny Edge detection and then \
+    Haar Cascade object detection on the video stream.
+    """
+    @apply_doc(HaarCam.run)
     def run(self, frame_throttle, classifier=None):
         if classifier is None:
             classifier = self.face_classifier

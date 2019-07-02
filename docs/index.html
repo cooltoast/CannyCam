@@ -106,7 +106,7 @@ python -m cannycam.cannyhaarcam
 <dt id="cannycam.cannycam.CannyCam">
 <em class="property">class </em><code class="descclassname">cannycam.cannycam.</code><code class="descname">CannyCam</code><span class="sig-paren">(</span><em>window</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/cannycam.html#CannyCam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.cannycam.CannyCam" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cannycam.basecam.BaseCam" title="cannycam.basecam.BaseCam"><code class="xref py py-class docutils literal notranslate"><span class="pre">cannycam.basecam.BaseCam</span></code></a></p>
-<p>Webcam that performs Canny Edge Detection on the video stream.</p>
+<p>Webcam that performs Canny Edge detection on the video stream.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -118,7 +118,8 @@ python -m cannycam.cannyhaarcam
 <dl class="method">
 <dt id="cannycam.cannycam.CannyCam.detect_edges">
 <code class="descname">detect_edges</code><span class="sig-paren">(</span><em>img</em>, <em>color=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/cannycam.html#CannyCam.detect_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.cannycam.CannyCam.detect_edges" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Detect edges of <code class="docutils literal notranslate"><span class="pre">img</span></code> with Canny Edge detection.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -164,7 +165,8 @@ python -m cannycam.cannyhaarcam
 <dl class="method">
 <dt id="cannycam.haarcam.HaarCam.detect_parts">
 <code class="descname">detect_parts</code><span class="sig-paren">(</span><em>img</em>, <em>classifier</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/haarcam.html#HaarCam.detect_parts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.haarcam.HaarCam.detect_parts" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Detect anatomical parts in <code class="docutils literal notranslate"><span class="pre">img</span></code> with Haar Cascade object detection.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -226,6 +228,7 @@ python -m cannycam.cannyhaarcam
 <dt id="cannycam.cannyhaarcam.CannyHaarCam">
 <em class="property">class </em><code class="descclassname">cannycam.cannyhaarcam.</code><code class="descname">CannyHaarCam</code><span class="sig-paren">(</span><em>window</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/cannyhaarcam.html#CannyHaarCam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cannycam.cannycam.CannyCam" title="cannycam.cannycam.CannyCam"><code class="xref py py-class docutils literal notranslate"><span class="pre">cannycam.cannycam.CannyCam</span></code></a>, <a class="reference internal" href="#cannycam.haarcam.HaarCam" title="cannycam.haarcam.HaarCam"><code class="xref py py-class docutils literal notranslate"><span class="pre">cannycam.haarcam.HaarCam</span></code></a></p>
+<p>Webcam that performs Canny Edge detection and then     Haar Cascade object detection on the video stream.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -237,7 +240,8 @@ python -m cannycam.cannyhaarcam
 <dl class="method">
 <dt id="cannycam.cannyhaarcam.CannyHaarCam.detect_edges">
 <code class="descname">detect_edges</code><span class="sig-paren">(</span><em>img</em>, <em>color=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.detect_edges" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Detect edges of <code class="docutils literal notranslate"><span class="pre">img</span></code> with Canny Edge detection.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -254,7 +258,8 @@ python -m cannycam.cannyhaarcam
 <dl class="method">
 <dt id="cannycam.cannyhaarcam.CannyHaarCam.detect_parts">
 <code class="descname">detect_parts</code><span class="sig-paren">(</span><em>img</em>, <em>classifier</em><span class="sig-paren">)</span><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.detect_parts" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Detect anatomical parts in <code class="docutils literal notranslate"><span class="pre">img</span></code> with Haar Cascade object detection.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -316,6 +321,20 @@ python -m cannycam.cannyhaarcam
 <div class="section" id="module-cannycam.util">
 <span id="utils"></span><h3>Utils<a class="headerlink" href="#module-cannycam.util" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
+<dt id="cannycam.util.apply_doc">
+<code class="descclassname">cannycam.util.</code><code class="descname">apply_doc</code><span class="sig-paren">(</span><em>source</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/util.html#apply_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.util.apply_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that will prepend <code class="docutils literal notranslate"><span class="pre">source</span></code>’s docstring to the decorated     object’s docstring.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>source</strong> – Object with docstring to be prepended onto the decorated object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="cannycam.util.get_cascade_file_path">
 <code class="descclassname">cannycam.util.</code><code class="descname">get_cascade_file_path</code><span class="sig-paren">(</span><em>cascade_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/util.html#get_cascade_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.util.get_cascade_file_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Formats a full filepath to the XML <code class="docutils literal notranslate"><span class="pre">cascade_file</span></code> in the <code class="docutils literal notranslate"><span class="pre">xmls</span></code> directory.</p>
@@ -324,20 +343,6 @@ python -m cannycam.cannyhaarcam
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cascade_file</strong> – XML file.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="cannycam.util.inherit_doc">
-<code class="descclassname">cannycam.util.</code><code class="descname">inherit_doc</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/util.html#inherit_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.util.inherit_doc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator that will prepend <code class="docutils literal notranslate"><span class="pre">parent</span></code>’s docstring to the decorated function.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> – Function whose docstring should be used to prepend with.</td>
 </tr>
 </tbody>
 </table>

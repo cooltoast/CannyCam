@@ -38,14 +38,14 @@
 <span class="kn">import</span> <span class="nn">cv2</span>
 
 <span class="kn">from</span> <span class="nn">basecam</span> <span class="k">import</span> <span class="n">BaseCam</span>
-<span class="kn">from</span> <span class="nn">util</span> <span class="k">import</span> <span class="n">get_cascade_file_path</span><span class="p">,</span> <span class="n">inherit_doc</span><span class="p">,</span> <span class="n">is_escape</span><span class="p">,</span> <span class="n">wait_frames</span>
+<span class="kn">from</span> <span class="nn">util</span> <span class="k">import</span> <span class="n">apply_doc</span><span class="p">,</span> <span class="n">get_cascade_file_path</span><span class="p">,</span> <span class="n">is_escape</span><span class="p">,</span> <span class="n">wait_frames</span>
 
 
 <div class="viewcode-block" id="HaarCam"><a class="viewcode-back" href="../../index.html#cannycam.haarcam.HaarCam">[docs]</a><span class="k">class</span> <span class="nc">HaarCam</span><span class="p">(</span><span class="n">BaseCam</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Webcam that performs Haar Cascade object detection on the video stream.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nd">@inherit_doc</span><span class="p">(</span><span class="n">BaseCam</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
+    <span class="nd">@apply_doc</span><span class="p">(</span><span class="n">BaseCam</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">HaarCam</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
 
@@ -56,6 +56,8 @@
 
 <div class="viewcode-block" id="HaarCam.detect_parts"><a class="viewcode-back" href="../../index.html#cannycam.haarcam.HaarCam.detect_parts">[docs]</a>    <span class="k">def</span> <span class="nf">detect_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">classifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect anatomical parts in ``img`` with Haar Cascade object detection.</span>
+
 <span class="sd">        :param img: Image read from webcam.</span>
 <span class="sd">        :param classifier: Classifier to detect anatomical parts.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -72,7 +74,7 @@
 
         <span class="k">return</span> <span class="n">img</span></div>
 
-<div class="viewcode-block" id="HaarCam.run"><a class="viewcode-back" href="../../index.html#cannycam.haarcam.HaarCam.run">[docs]</a>    <span class="nd">@inherit_doc</span><span class="p">(</span><span class="n">BaseCam</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
+<div class="viewcode-block" id="HaarCam.run"><a class="viewcode-back" href="../../index.html#cannycam.haarcam.HaarCam.run">[docs]</a>    <span class="nd">@apply_doc</span><span class="p">(</span><span class="n">BaseCam</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame_throttle</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param classifier: Classifier to detect anatomical parts. Defaults \</span>

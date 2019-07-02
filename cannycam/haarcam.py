@@ -3,14 +3,14 @@
 import cv2
 
 from basecam import BaseCam
-from util import get_cascade_file_path, inherit_doc, is_escape, wait_frames
+from util import apply_doc, get_cascade_file_path, is_escape, wait_frames
 
 
 class HaarCam(BaseCam):
     """
     Webcam that performs Haar Cascade object detection on the video stream.
     """
-    @inherit_doc(BaseCam.__init__)
+    @apply_doc(BaseCam.__init__)
     def __init__(self, window):
         super(HaarCam, self).__init__(window)
 
@@ -21,6 +21,8 @@ class HaarCam(BaseCam):
 
     def detect_parts(self, img, classifier):
         """
+        Detect anatomical parts in ``img`` with Haar Cascade object detection.
+
         :param img: Image read from webcam.
         :param classifier: Classifier to detect anatomical parts.
         """
@@ -37,7 +39,7 @@ class HaarCam(BaseCam):
 
         return img
 
-    @inherit_doc(BaseCam.run)
+    @apply_doc(BaseCam.run)
     def run(self, frame_throttle, classifier=None):
         """
         :param classifier: Classifier to detect anatomical parts. Defaults \

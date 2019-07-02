@@ -40,6 +40,26 @@
 <span class="n">XML_DIRECTORY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s1">&#39;xmls&#39;</span><span class="p">)</span>
 
 
+<div class="viewcode-block" id="apply_doc"><a class="viewcode-back" href="../../index.html#cannycam.util.apply_doc">[docs]</a><span class="k">def</span> <span class="nf">apply_doc</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator that will prepend ``source``&#39;s docstring to the decorated \</span>
+<span class="sd">    object&#39;s docstring.</span>
+
+<span class="sd">    :param source: Object with docstring to be prepended onto the decorated object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+        <span class="n">source_doc</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="vm">__doc__</span>
+
+        <span class="k">if</span> <span class="n">target</span><span class="o">.</span><span class="vm">__doc__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">target</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">source_doc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">target</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">source_doc</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">target</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
 <div class="viewcode-block" id="get_cascade_file_path"><a class="viewcode-back" href="../../index.html#cannycam.util.get_cascade_file_path">[docs]</a><span class="k">def</span> <span class="nf">get_cascade_file_path</span><span class="p">(</span><span class="n">cascade_file</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Formats a full filepath to the XML ``cascade_file`` in the ``xmls`` directory.</span>
@@ -47,25 +67,6 @@
 <span class="sd">    :param cascade_file: XML file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">XML_DIRECTORY</span><span class="p">,</span> <span class="n">cascade_file</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="inherit_doc"><a class="viewcode-back" href="../../index.html#cannycam.util.inherit_doc">[docs]</a><span class="k">def</span> <span class="nf">inherit_doc</span><span class="p">(</span><span class="n">parent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decorator that will prepend ``parent``&#39;s docstring to the decorated function.</span>
-
-<span class="sd">    :param parent: Function whose docstring should be used to prepend with.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-        <span class="n">parent_doc</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="vm">__doc__</span>
-
-        <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">parent_doc</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">parent_doc</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">))</span>
-
-        <span class="k">return</span> <span class="n">func</span>
-
-    <span class="k">return</span> <span class="n">decorator</span></div>
 
 
 <div class="viewcode-block" id="is_escape"><a class="viewcode-back" href="../../index.html#cannycam.util.is_escape">[docs]</a><span class="k">def</span> <span class="nf">is_escape</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>

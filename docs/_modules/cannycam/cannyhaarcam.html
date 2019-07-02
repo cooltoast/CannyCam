@@ -39,11 +39,15 @@
 
 <span class="kn">from</span> <span class="nn">cannycam</span> <span class="k">import</span> <span class="n">CannyCam</span>
 <span class="kn">from</span> <span class="nn">haarcam</span> <span class="k">import</span> <span class="n">HaarCam</span>
-<span class="kn">from</span> <span class="nn">util</span> <span class="k">import</span> <span class="n">inherit_doc</span><span class="p">,</span> <span class="n">is_escape</span><span class="p">,</span> <span class="n">wait_frames</span>
+<span class="kn">from</span> <span class="nn">util</span> <span class="k">import</span> <span class="n">apply_doc</span><span class="p">,</span> <span class="n">is_escape</span><span class="p">,</span> <span class="n">wait_frames</span>
 
 
 <div class="viewcode-block" id="CannyHaarCam"><a class="viewcode-back" href="../../index.html#cannycam.cannyhaarcam.CannyHaarCam">[docs]</a><span class="k">class</span> <span class="nc">CannyHaarCam</span><span class="p">(</span><span class="n">CannyCam</span><span class="p">,</span> <span class="n">HaarCam</span><span class="p">):</span>
-<div class="viewcode-block" id="CannyHaarCam.run"><a class="viewcode-back" href="../../index.html#cannycam.cannyhaarcam.CannyHaarCam.run">[docs]</a>    <span class="nd">@inherit_doc</span><span class="p">(</span><span class="n">HaarCam</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Webcam that performs Canny Edge detection and then \</span>
+<span class="sd">    Haar Cascade object detection on the video stream.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CannyHaarCam.run"><a class="viewcode-back" href="../../index.html#cannycam.cannyhaarcam.CannyHaarCam.run">[docs]</a>    <span class="nd">@apply_doc</span><span class="p">(</span><span class="n">HaarCam</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame_throttle</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">classifier</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">classifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_classifier</span>

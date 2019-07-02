@@ -3,19 +3,19 @@
 import cv2
 
 from basecam import BaseCam
-from util import inherit_doc, is_escape, wait_frames
+from util import apply_doc, is_escape, wait_frames
 
 
 class CannyCam(BaseCam):
     """
-    Webcam that performs Canny Edge Detection on the video stream.
+    Webcam that performs Canny Edge detection on the video stream.
     """
     KERNEL_SIZE = 3
     MIN_THRESHOLD = 0
     MAX_THRESHOLD = 100
     RATIO = 3
 
-    @inherit_doc(BaseCam.__init__)
+    @apply_doc(BaseCam.__init__)
     def __init__(self, window):
         super(CannyCam, self).__init__(window)
         self.threshold = self.MIN_THRESHOLD
@@ -28,6 +28,8 @@ class CannyCam(BaseCam):
 
     def detect_edges(self, img, color=True):
         """
+        Detect edges of ``img`` with Canny Edge detection.
+
         :param img: Image read from webcam.
         :param color: Boolean to indicate if should use color. Defaults to True.
         """
@@ -42,7 +44,7 @@ class CannyCam(BaseCam):
         # add colors to edges from original image
         return cv2.bitwise_and(img, img, mask=detected_edges) if color else detected_edges
 
-    @inherit_doc(BaseCam.run)
+    @apply_doc(BaseCam.run)
     def run(self, frame_throttle):
         try:
             for _ in wait_frames(throttle=frame_throttle):
