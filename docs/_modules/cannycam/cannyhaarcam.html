@@ -47,6 +47,7 @@
 <span class="sd">    Webcam that performs Canny Edge detection and then \</span>
 <span class="sd">    Haar Cascade object detection on the video stream.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="CannyHaarCam.run"><a class="viewcode-back" href="../../index.html#cannycam.cannyhaarcam.CannyHaarCam.run">[docs]</a>    <span class="nd">@apply_doc</span><span class="p">(</span><span class="n">HaarCam</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame_throttle</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">classifier</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -68,11 +69,11 @@
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">CannyHaarCam</span><span class="p">(</span><span class="s1">&#39;cannyhaarcam&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">CannyHaarCam</span><span class="p">(</span><span class="s2">&quot;cannyhaarcam&quot;</span><span class="p">)</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">frame_throttle</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 

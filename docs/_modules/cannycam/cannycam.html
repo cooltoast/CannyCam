@@ -45,6 +45,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Webcam that performs Canny Edge detection on the video stream.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">KERNEL_SIZE</span> <span class="o">=</span> <span class="mi">3</span>
     <span class="n">MIN_THRESHOLD</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">MAX_THRESHOLD</span> <span class="o">=</span> <span class="mi">100</span>
@@ -55,11 +56,9 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">CannyCam</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MIN_THRESHOLD</span>
 
-        <span class="n">cv2</span><span class="o">.</span><span class="n">createTrackbar</span><span class="p">(</span><span class="s1">&#39;Threshold&#39;</span><span class="p">,</span>
-                           <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="p">,</span>
-                           <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">,</span>
-                           <span class="bp">self</span><span class="o">.</span><span class="n">MAX_THRESHOLD</span><span class="p">,</span>
-                           <span class="bp">self</span><span class="o">.</span><span class="n">_on_threshold_change</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">createTrackbar</span><span class="p">(</span>
+            <span class="s2">&quot;Threshold&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_THRESHOLD</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_threshold_change</span>
+        <span class="p">)</span>
 
 <div class="viewcode-block" id="CannyCam.detect_edges"><a class="viewcode-back" href="../../index.html#cannycam.cannycam.CannyCam.detect_edges">[docs]</a>    <span class="k">def</span> <span class="nf">detect_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -71,10 +70,12 @@
         <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
 
         <span class="n">detected_edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">detected_edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">detected_edges</span><span class="p">,</span>
-                                   <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">,</span>
-                                   <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">RATIO</span><span class="p">,</span>
-                                   <span class="n">apertureSize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">KERNEL_SIZE</span><span class="p">)</span>
+        <span class="n">detected_edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span>
+            <span class="n">detected_edges</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">RATIO</span><span class="p">,</span>
+            <span class="n">apertureSize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">KERNEL_SIZE</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="c1"># add colors to edges from original image</span>
         <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">detected_edges</span><span class="p">)</span> <span class="k">if</span> <span class="n">color</span> <span class="k">else</span> <span class="n">detected_edges</span></div>
@@ -99,11 +100,11 @@
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">CannyCam</span><span class="p">(</span><span class="s1">&#39;cannycam&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">CannyCam</span><span class="p">(</span><span class="s2">&quot;cannycam&quot;</span><span class="p">)</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">frame_throttle</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
