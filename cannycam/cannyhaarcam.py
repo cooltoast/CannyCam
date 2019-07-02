@@ -4,19 +4,12 @@ import cv2
 
 from cannycam import CannyCam
 from haarcam import HaarCam
-from util import is_escape, wait_frames
+from util import inherit_doc, is_escape, wait_frames
 
 
 class CannyHaarCam(CannyCam, HaarCam):
+    @inherit_doc(HaarCam.run)
     def run(self, frame_throttle, classifier=None):
-        """
-        Run main CannyHaarCam loop.
-
-        :param frame_throttle: Number of frames to throttle processing for capturing
-        an image from the webcam and performing edge detection.
-        :param classifier: Classifier to detect anatomical parts. Defaults
-        to a face classifier.
-        """
         if classifier is None:
             classifier = self.face_classifier
 
