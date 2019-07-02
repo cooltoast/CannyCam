@@ -1,0 +1,450 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>CannyCam &#8212; CannyCam 0.0.5 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="cannycam">
+<h1>CannyCam<a class="headerlink" href="#cannycam" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Uses webcam stream and performs Canny Edge Detection and Haar Cascade image detection.</p>
+<p>Canny Edge Detection removes noise from image, giving black background and white outline. This accentuates sharp edges in the image, making it very easy to detect a target.</p>
+<p>Haar Cascade image detection actually detects the target, given a training set of positive images (pictures of the target) and negative images (pictures not containing target, should be images of the physical backgroud used for the experiment).</p>
+<p>Together, they take a video as a stream of images, to isolate and detect the target.</p>
+<p>Targets used: face, upper body, lower body, hands. Knee, elbow, smaller body parts are work in progress.</p>
+<p>Next step is to implement this into a diagnostic image detection program for assisting doctors. E.g. patient goes to doctor with broken ankle, doctor takes x-ray, diagnostic image detection program may be able to detect certain problems with patient’s ankle upon scanning the x-ray.</p>
+<p>CannyCam. Better than a nannycam.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install cannycam
+</pre></div>
+</div>
+</div>
+<div class="section" id="run">
+<h2>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
+<p>From the command line</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m cannycam.cannycam
+python -m cannycam.haarcam
+python -m cannycam.cannyhaarcam
+</pre></div>
+</div>
+<p>Or in python</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cannycam</span>
+
+<span class="n">cannycam</span><span class="o">.</span><span class="n">cannycam</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+<span class="n">cannycam</span><span class="o">.</span><span class="n">haarcam</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+<span class="n">cannycam</span><span class="o">.</span><span class="n">cannyhaarcam</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cannycam.basecam">
+<span id="webcams"></span><h3>Webcams<a class="headerlink" href="#module-cannycam.basecam" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="cannycam.basecam.BaseCam">
+<em class="property">class </em><code class="descclassname">cannycam.basecam.</code><code class="descname">BaseCam</code><span class="sig-paren">(</span><em>window</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/basecam.html#BaseCam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.basecam.BaseCam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract class for running a cv2 webcam.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>window</strong> – Name of the window that the cv2 webcam will open.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="cannycam.basecam.BaseCam.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>frame_throttle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/basecam.html#BaseCam.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.basecam.BaseCam.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run main cv2 webcam capture loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frame_throttle</strong> – Number of frames to throttle for         capturing and processing an image from the webcam.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-cannycam.cannycam"></span><dl class="class">
+<dt id="cannycam.cannycam.CannyCam">
+<em class="property">class </em><code class="descclassname">cannycam.cannycam.</code><code class="descname">CannyCam</code><span class="sig-paren">(</span><em>window</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/cannycam.html#CannyCam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.cannycam.CannyCam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cannycam.basecam.BaseCam" title="cannycam.basecam.BaseCam"><code class="xref py py-class docutils literal notranslate"><span class="pre">cannycam.basecam.BaseCam</span></code></a></p>
+<p>Webcam that performs Canny Edge Detection on the video stream.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>window</strong> – Name of the window that the cv2 webcam will open.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="cannycam.cannycam.CannyCam.detect_edges">
+<code class="descname">detect_edges</code><span class="sig-paren">(</span><em>img</em>, <em>color=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/cannycam.html#CannyCam.detect_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.cannycam.CannyCam.detect_edges" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>img</strong> – Image read from webcam.</li>
+<li><strong>color</strong> – Boolean to indicate if should use color. Defaults to True.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cannycam.cannycam.CannyCam.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>frame_throttle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/cannycam.html#CannyCam.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.cannycam.CannyCam.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run main cv2 webcam capture loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>frame_throttle</strong> – Number of frames to throttle for         capturing and processing an image from the webcam.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-cannycam.haarcam"></span><dl class="class">
+<dt id="cannycam.haarcam.HaarCam">
+<em class="property">class </em><code class="descclassname">cannycam.haarcam.</code><code class="descname">HaarCam</code><span class="sig-paren">(</span><em>window</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/haarcam.html#HaarCam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.haarcam.HaarCam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cannycam.basecam.BaseCam" title="cannycam.basecam.BaseCam"><code class="xref py py-class docutils literal notranslate"><span class="pre">cannycam.basecam.BaseCam</span></code></a></p>
+<p>Webcam that performs Haar Cascade object detection on the video stream.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>window</strong> – Name of the window that the cv2 webcam will open.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="cannycam.haarcam.HaarCam.detect_parts">
+<code class="descname">detect_parts</code><span class="sig-paren">(</span><em>img</em>, <em>classifier</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/haarcam.html#HaarCam.detect_parts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.haarcam.HaarCam.detect_parts" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>img</strong> – Image read from webcam.</li>
+<li><strong>classifier</strong> – Classifier to detect anatomical parts.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cannycam.haarcam.HaarCam.face_classifier">
+<code class="descname">face_classifier</code><a class="headerlink" href="#cannycam.haarcam.HaarCam.face_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a face classifier.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cannycam.haarcam.HaarCam.fullbody_classifier">
+<code class="descname">fullbody_classifier</code><a class="headerlink" href="#cannycam.haarcam.HaarCam.fullbody_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a full body classifier.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cannycam.haarcam.HaarCam.lowerbody_classifier">
+<code class="descname">lowerbody_classifier</code><a class="headerlink" href="#cannycam.haarcam.HaarCam.lowerbody_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a lower body classifier.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cannycam.haarcam.HaarCam.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>frame_throttle</em>, <em>classifier=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/haarcam.html#HaarCam.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.haarcam.HaarCam.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run main cv2 webcam capture loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>frame_throttle</strong> – Number of frames to throttle for         capturing and processing an image from the webcam.</li>
+<li><strong>classifier</strong> – Classifier to detect anatomical parts. Defaults         to a face classifier if <code class="docutils literal notranslate"><span class="pre">None</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cannycam.haarcam.HaarCam.upperbody_classifier">
+<code class="descname">upperbody_classifier</code><a class="headerlink" href="#cannycam.haarcam.HaarCam.upperbody_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an upper body classifier.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-cannycam.cannyhaarcam"></span><dl class="class">
+<dt id="cannycam.cannyhaarcam.CannyHaarCam">
+<em class="property">class </em><code class="descclassname">cannycam.cannyhaarcam.</code><code class="descname">CannyHaarCam</code><span class="sig-paren">(</span><em>window</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/cannyhaarcam.html#CannyHaarCam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cannycam.cannycam.CannyCam" title="cannycam.cannycam.CannyCam"><code class="xref py py-class docutils literal notranslate"><span class="pre">cannycam.cannycam.CannyCam</span></code></a>, <a class="reference internal" href="#cannycam.haarcam.HaarCam" title="cannycam.haarcam.HaarCam"><code class="xref py py-class docutils literal notranslate"><span class="pre">cannycam.haarcam.HaarCam</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>window</strong> – Name of the window that the cv2 webcam will open.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="cannycam.cannyhaarcam.CannyHaarCam.detect_edges">
+<code class="descname">detect_edges</code><span class="sig-paren">(</span><em>img</em>, <em>color=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.detect_edges" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>img</strong> – Image read from webcam.</li>
+<li><strong>color</strong> – Boolean to indicate if should use color. Defaults to True.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cannycam.cannyhaarcam.CannyHaarCam.detect_parts">
+<code class="descname">detect_parts</code><span class="sig-paren">(</span><em>img</em>, <em>classifier</em><span class="sig-paren">)</span><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.detect_parts" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>img</strong> – Image read from webcam.</li>
+<li><strong>classifier</strong> – Classifier to detect anatomical parts.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cannycam.cannyhaarcam.CannyHaarCam.face_classifier">
+<code class="descname">face_classifier</code><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.face_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a face classifier.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cannycam.cannyhaarcam.CannyHaarCam.fullbody_classifier">
+<code class="descname">fullbody_classifier</code><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.fullbody_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a full body classifier.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cannycam.cannyhaarcam.CannyHaarCam.lowerbody_classifier">
+<code class="descname">lowerbody_classifier</code><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.lowerbody_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a lower body classifier.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cannycam.cannyhaarcam.CannyHaarCam.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>frame_throttle</em>, <em>classifier=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/cannyhaarcam.html#CannyHaarCam.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run main cv2 webcam capture loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>frame_throttle</strong> – Number of frames to throttle for         capturing and processing an image from the webcam.</li>
+<li><strong>classifier</strong> – Classifier to detect anatomical parts. Defaults         to a face classifier if <code class="docutils literal notranslate"><span class="pre">None</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cannycam.cannyhaarcam.CannyHaarCam.upperbody_classifier">
+<code class="descname">upperbody_classifier</code><a class="headerlink" href="#cannycam.cannyhaarcam.CannyHaarCam.upperbody_classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an upper body classifier.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-cannycam.util">
+<span id="utils"></span><h3>Utils<a class="headerlink" href="#module-cannycam.util" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="cannycam.util.get_cascade_file_path">
+<code class="descclassname">cannycam.util.</code><code class="descname">get_cascade_file_path</code><span class="sig-paren">(</span><em>cascade_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/util.html#get_cascade_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.util.get_cascade_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats a full filepath to the XML <code class="docutils literal notranslate"><span class="pre">cascade_file</span></code> in the <code class="docutils literal notranslate"><span class="pre">xmls</span></code> directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cascade_file</strong> – XML file.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cannycam.util.inherit_doc">
+<code class="descclassname">cannycam.util.</code><code class="descname">inherit_doc</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/util.html#inherit_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.util.inherit_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that will prepend <code class="docutils literal notranslate"><span class="pre">parent</span></code>’s docstring to the decorated function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> – Function whose docstring should be used to prepend with.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cannycam.util.is_escape">
+<code class="descclassname">cannycam.util.</code><code class="descname">is_escape</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/util.html#is_escape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.util.is_escape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if <code class="docutils literal notranslate"><span class="pre">key</span></code> is the ESC key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> – Key to check.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cannycam.util.wait_frames">
+<code class="descclassname">cannycam.util.</code><code class="descname">wait_frames</code><span class="sig-paren">(</span><em>throttle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cannycam/util.html#wait_frames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cannycam.util.wait_frames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator that yields every <code class="docutils literal notranslate"><span class="pre">throttle</span></code> frames.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>throttle</strong> – Number of frames to wait before yielding.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">CannyCam</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, cooltoast.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
