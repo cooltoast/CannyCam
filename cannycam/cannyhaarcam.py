@@ -12,6 +12,7 @@ class CannyHaarCam(CannyCam, HaarCam):
     Webcam that performs Canny Edge detection and then \
     Haar Cascade object detection on the video stream.
     """
+
     @apply_doc(HaarCam.run)
     def run(self, frame_throttle, classifier=None):
         if classifier is None:
@@ -33,9 +34,9 @@ class CannyHaarCam(CannyCam, HaarCam):
 
 
 def main():
-    c = CannyHaarCam('cannyhaarcam')
+    c = CannyHaarCam("cannyhaarcam")
     c.run(frame_throttle=10)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

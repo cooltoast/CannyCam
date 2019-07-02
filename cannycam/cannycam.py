@@ -10,6 +10,7 @@ class CannyCam(BaseCam):
     """
     Webcam that performs Canny Edge detection on the video stream.
     """
+
     KERNEL_SIZE = 3
     MIN_THRESHOLD = 0
     MAX_THRESHOLD = 100
@@ -20,11 +21,9 @@ class CannyCam(BaseCam):
         super(CannyCam, self).__init__(window)
         self.threshold = self.MIN_THRESHOLD
 
-        cv2.createTrackbar('Threshold',
-                           self.window,
-                           self.threshold,
-                           self.MAX_THRESHOLD,
-                           self._on_threshold_change)
+        cv2.createTrackbar(
+            "Threshold", self.window, self.threshold, self.MAX_THRESHOLD, self._on_threshold_change
+        )
 
     def detect_edges(self, img, color=True):
         """
@@ -36,10 +35,12 @@ class CannyCam(BaseCam):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         detected_edges = cv2.GaussianBlur(gray, (3, 3), 0)
-        detected_edges = cv2.Canny(detected_edges,
-                                   self.threshold,
-                                   self.threshold * self.RATIO,
-                                   apertureSize=self.KERNEL_SIZE)
+        detected_edges = cv2.Canny(
+            detected_edges,
+            self.threshold,
+            self.threshold * self.RATIO,
+            apertureSize=self.KERNEL_SIZE,
+        )
 
         # add colors to edges from original image
         return cv2.bitwise_and(img, img, mask=detected_edges) if color else detected_edges
@@ -64,9 +65,9 @@ class CannyCam(BaseCam):
 
 
 def main():
-    c = CannyCam('cannycam')
+    c = CannyCam("cannycam")
     c.run(frame_throttle=10)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

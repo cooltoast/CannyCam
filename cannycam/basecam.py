@@ -7,6 +7,7 @@ class BaseCam(object):
     """
     Abstract class for running a cv2 webcam.
     """
+
     __metaclass__ = abc.ABCMeta
 
     def __init__(self, window):

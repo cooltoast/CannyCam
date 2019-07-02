@@ -10,14 +10,15 @@ class HaarCam(BaseCam):
     """
     Webcam that performs Haar Cascade object detection on the video stream.
     """
+
     @apply_doc(BaseCam.__init__)
     def __init__(self, window):
         super(HaarCam, self).__init__(window)
 
-        self._face_classifier = self._init_classifier('haarcascade_frontalface_default.xml')
-        self._fullbody_classifier = self._init_classifier('haarcascade_fullbody.xml')
-        self._lowerbody_classifier = self._init_classifier('haarcascade_lowerbody.xml')
-        self._upperbody_classifier = self._init_classifier('haarcascade_upperbody.xml')
+        self._face_classifier = self._init_classifier("haarcascade_frontalface_default.xml")
+        self._fullbody_classifier = self._init_classifier("haarcascade_fullbody.xml")
+        self._lowerbody_classifier = self._init_classifier("haarcascade_lowerbody.xml")
+        self._upperbody_classifier = self._init_classifier("haarcascade_upperbody.xml")
 
     def detect_parts(self, img, classifier):
         """
@@ -31,11 +32,7 @@ class HaarCam(BaseCam):
         parts = classifier.detectMultiScale(gray, 1.3, 5)
 
         for x, y, w, h in parts:
-            cv2.rectangle(img,
-                          (x, y),
-                          (x + w, y + h),
-                          (255, 0, 0),
-                          thickness=2)
+            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), thickness=2)
 
         return img
 
@@ -99,9 +96,9 @@ class HaarCam(BaseCam):
 
 
 def main():
-    h = HaarCam('haarcam')
+    h = HaarCam("haarcam")
     h.run(frame_throttle=10)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

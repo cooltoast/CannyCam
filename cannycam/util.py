@@ -2,7 +2,7 @@ import os
 
 
 ESCAPE_ASCII = 27
-XML_DIRECTORY = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'xmls')
+XML_DIRECTORY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "xmls")
 
 
 def apply_doc(source):
@@ -12,13 +12,14 @@ def apply_doc(source):
 
     :param source: Object with docstring to be prepended onto the decorated object.
     """
+
     def decorator(target):
         source_doc = source.__doc__
 
         if target.__doc__ is None:
             target.__doc__ = source_doc
         else:
-            target.__doc__ = '\n'.join((source_doc, target.__doc__))
+            target.__doc__ = "\n".join((source_doc, target.__doc__))
 
         return target
 
