@@ -3,14 +3,15 @@
 import cv2
 
 from basecam import BaseCam
-from util import get_cascade_file_path, is_escape, wait_frames
+from util import get_cascade_file_path, inherit_doc, is_escape, wait_frames
 
 
 class HaarCam(BaseCam):
+    """
+    Webcam that performs Haar Cascade object detection on the video stream.
+    """
+    @inherit_doc(BaseCam.__init__)
     def __init__(self, window):
-        """
-        :param window: Name of the window that BaseCam will open.
-        """
         super(HaarCam, self).__init__(window)
 
         self._face_classifier = self._init_classifier('haarcascade_frontalface_default.xml')
@@ -19,6 +20,10 @@ class HaarCam(BaseCam):
         self._upperbody_classifier = self._init_classifier('haarcascade_upperbody.xml')
 
     def detect_parts(self, img, classifier):
+        """
+        :param img: Image read from webcam.
+        :param classifier: Classifier to detect anatomical parts.
+        """
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         parts = classifier.detectMultiScale(gray, 1.3, 5)
@@ -32,14 +37,11 @@ class HaarCam(BaseCam):
 
         return img
 
+    @inherit_doc(BaseCam.run)
     def run(self, frame_throttle, classifier=None):
         """
-        Run main HaarCam loop.
-
-        :param frame_throttle: Number of frames to throttle for capturing
-        and processing an image from the webcam.
-        :param classifier: Classifier to detect anatomical parts. Defaults
-        to a face classifier.
+        :param classifier: Classifier to detect anatomical parts. Defaults \
+        to a face classifier if ``None``.
         """
         if classifier is None:
             classifier = self.face_classifier
@@ -59,18 +61,30 @@ class HaarCam(BaseCam):
 
     @property
     def face_classifier(self):
+        """
+        Get a face classifier.
+        """
         return self._face_classifier
 
     @property
     def fullbody_classifier(self):
+        """
+        Get a full body classifier.
+        """
         return self._fullbody_classifier
 
     @property
     def lowerbody_classifier(self):
+        """
+        Get a lower body classifier.
+        """
         return self._lowerbody_classifier
 
     @property
     def upperbody_classifier(self):
+        """
+        Get an upper body classifier.
+        """
         return self._upperbody_classifier
 
     def _init_classifier(self, cascade_file):
