@@ -21,4 +21,5 @@ help:
 github-docs:
 	@make html
 	@cp -a _build/html/. ../docs
+	@rm -rf ../docs/_sources
 

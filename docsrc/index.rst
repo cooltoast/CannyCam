@@ -5,6 +5,8 @@
 
 CannyCam
 ====================================
+.. image:: https://badge.fury.io/py/cannycam.svg
+   :target: https://badge.fury.io/py/cannycam
 
 .. toctree::
    :maxdepth: 2
