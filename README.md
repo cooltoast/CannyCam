@@ -1,4 +1,4 @@
 CannyCam
 ========
 
-Official Documentation: http://cooltoast.github.io/CannyCam
+Official Documentation: https://cooltoast.github.io/CannyCam
