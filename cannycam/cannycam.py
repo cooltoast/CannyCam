@@ -1,5 +1,3 @@
-#!/usr/bin/env python2.7
-
 import cv2
 
 from basecam import BaseCam
@@ -21,9 +19,7 @@ class CannyCam(BaseCam):
         super(CannyCam, self).__init__(window)
         self.threshold = self.MIN_THRESHOLD
 
-        cv2.createTrackbar(
-            "Threshold", self.window, self.threshold, self.MAX_THRESHOLD, self._on_threshold_change
-        )
+        cv2.createTrackbar("Threshold", self.window, self.threshold, self.MAX_THRESHOLD, self._on_threshold_change)
 
     def detect_edges(self, img, color=True):
         """

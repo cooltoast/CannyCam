@@ -1,6 +1,5 @@
 import os
 
-
 ESCAPE_ASCII = 27
 XML_DIRECTORY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "xmls")
 

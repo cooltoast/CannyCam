@@ -1,5 +1,3 @@
-#!/usr/bin/env python2.7
-
 import cv2
 
 from basecam import BaseCam

@@ -1,0 +1,42 @@
+---
+exclude: >
+  (?x)^(
+    docs/.*|
+    versioneer.py|
+    .*/_version.py|
+    .*/.*.xml
+  )$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+      - id: black
+        args:
+          - "--line-length"
+          - "120"
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.7.0
+    hooks:
+      - id: isort
+        args:
+          - "--atomic"
+          - "--line-width=120"
+          - "--project=basecam"
+          - "--project=cannycam"
+          - "--project=cannyhaarcam"
+          - "--project=haarcam"
+          - "--project=util"
+          # For black compatibility: https://black.readthedocs.io/en/stable/compatible_configs.html#isort
+          - "--multi-line=3"
+          - "--trailing-comma"
+          - "--force-grid-wrap=0"
+          - "--use-parentheses"
+          - "--ensure-newline-before-comments"
